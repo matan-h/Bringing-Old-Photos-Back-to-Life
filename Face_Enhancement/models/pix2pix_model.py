@@ -2,9 +2,12 @@
 # Licensed under the MIT License.
 
 import torch
-import models.networks as networks
-import util.util as util
-
+try:
+    import models.networks as networks
+    import util.util as util
+except ImportError:
+    from ..models import networks
+    from ..util import util
 
 class Pix2PixModel(torch.nn.Module):
     @staticmethod

@@ -1,9 +1,12 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
-from data.base_dataset import BaseDataset, get_params, get_transform
+try:
+    from data.base_dataset import BaseDataset, get_params, get_transform
+    import util.util as util
+except ImportError:
+    from ..data.base_dataset import BaseDataset, get_params, get_transform
+    from ..util import util
 from PIL import Image
-import util.util as util
 import os
 import torch
 

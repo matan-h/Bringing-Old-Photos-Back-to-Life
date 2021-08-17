@@ -4,10 +4,18 @@
 import os
 from collections import OrderedDict
 from torch.autograd import Variable
-from options.test_options import TestOptions
-from models.models import create_model
-from models.mapping_model import Pix2PixHDModel_Mapping
-import util.util as util
+
+try:
+    from options.test_options import TestOptions
+    from models.models import create_model
+    from models.mapping_model import Pix2PixHDModel_Mapping
+    import util.util as util
+except ImportError:
+    from .options.test_options import TestOptions
+    from .models.models import create_model
+    from .models.mapping_model import Pix2PixHDModel_Mapping
+    from .util import util
+
 from PIL import Image
 import torch
 import torchvision.utils as vutils
@@ -15,8 +23,8 @@ import torchvision.transforms as transforms
 import numpy as np
 import cv2
 
-def data_transforms(img, method=Image.BILINEAR, scale=False):
 
+def data_transforms(img, method=Image.BILINEAR, scale=False):
     ow, oh = img.size
     pw, ph = ow, oh
     if scale == True:
@@ -45,7 +53,6 @@ def data_transforms_rgb_old(img):
 
 
 def irregular_hole_synthesize(img, mask):
-
     img_np = np.array(img).astype("uint8")
     mask_np = np.array(mask).astype("uint8")
     mask_np = mask_np / 255
@@ -143,9 +150,9 @@ def main(opt=None):
             mask_name = mask_loader[i]
             mask = Image.open(os.path.join(opt.test_mask, mask_name)).convert("RGB")
             if opt.mask_dilation != 0:
-                kernel = np.ones((3,3),np.uint8)
+                kernel = np.ones((3, 3), np.uint8)
                 mask = np.array(mask)
-                mask = cv2.dilate(mask,kernel,iterations = opt.mask_dilation)
+                mask = cv2.dilate(mask, kernel, iterations=opt.mask_dilation)
                 mask = Image.fromarray(mask.astype('uint8'))
             origin = input
             input = irregular_hole_synthesize(input, mask)

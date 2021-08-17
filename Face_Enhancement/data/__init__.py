@@ -3,8 +3,12 @@
 
 import importlib
 import torch.utils.data
-from data.base_dataset import BaseDataset
-from data.face_dataset import FaceTestDataset
+try:
+    from data.base_dataset import BaseDataset
+    from data.face_dataset import FaceTestDataset
+except ImportError:
+    from ..data.base_dataset import BaseDataset
+    from ..data.face_dataset import FaceTestDataset
 
 
 def create_dataloader(opt):

@@ -4,10 +4,15 @@
 import sys
 import argparse
 import os
-from util import util
+try:
+    from util import util
+    import models
+    import data
+except ImportError:
+    from ..util import util
+    from .. import models
+    from .. import data
 import torch
-import models
-import data
 import pickle
 
 

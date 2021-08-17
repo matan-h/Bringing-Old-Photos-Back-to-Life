@@ -3,11 +3,16 @@
 
 import os
 from collections import OrderedDict
-
-import data
-from options.test_options import TestOptions
-from models.pix2pix_model import Pix2PixModel
-from util.visualizer import Visualizer
+try:
+    import data
+    from options.test_options import TestOptions
+    from models.pix2pix_model import Pix2PixModel
+    from util.visualizer import Visualizer
+except ImportError:
+    from . import data
+    from .options.test_options import TestOptions
+    from .models.pix2pix_model import Pix2PixModel
+    from .util.visualizer import Visualizer
 import torchvision.utils as vutils
 import warnings
 def main(opt=None):

@@ -3,7 +3,10 @@
 
 import argparse
 import os
-from util import util
+try:
+    from util import util
+except ImportError:
+    from ..util import util
 import torch
 
 
