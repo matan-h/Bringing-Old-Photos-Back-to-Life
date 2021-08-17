@@ -13,9 +13,12 @@ import torch
 import torch.nn.functional as F
 import torchvision as tv
 from PIL import Image, ImageFile
-
-from detection_models import networks
-from detection_util.util import *
+try:
+    from detection_models import networks
+    from detection_util.util import *
+except ImportError:
+    from .detection_models import networks
+    from .detection_util.util import *
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -166,7 +169,7 @@ def main(config):
         torch.cuda.empty_cache()
 
 
-if __name__ == "__main__":
+def parse(opts=None):
     parser = argparse.ArgumentParser()
     # parser.add_argument('--checkpoint_name', type=str, default="FT_Epoch_latest.pt", help='Checkpoint Name')
 
@@ -174,6 +177,9 @@ if __name__ == "__main__":
     parser.add_argument("--test_path", type=str, default=".")
     parser.add_argument("--output_dir", type=str, default=".")
     parser.add_argument("--input_size", type=str, default="scale_256", help="resize_256|full_size|scale_256")
-    config = parser.parse_args()
+    if opts is None:
+        config = parser.parse_args()
+    else:
+        config = parser.parse_args(opts)
 
     main(config)

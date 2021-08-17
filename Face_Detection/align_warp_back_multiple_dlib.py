@@ -344,13 +344,16 @@ def search(face_landmarks):
     return results
 
 
-if __name__ == "__main__":
+def main(opts=None):
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--origin_url", type=str, default="./", help="origin images")
     parser.add_argument("--replace_url", type=str, default="./", help="restored faces")
     parser.add_argument("--save_url", type=str, default="./save")
-    opts = parser.parse_args()
+    if opts is None:
+        opts = parser.parse_args()
+    else:
+        opts = parser.parse_args(opts)
 
     origin_url = opts.origin_url
     replace_url = opts.replace_url
@@ -435,3 +438,6 @@ if __name__ == "__main__":
         if count % 1000 == 0:
             print("%d have finished ..." % (count))
 
+
+if __name__ == '__main__':
+    main()

@@ -2,6 +2,8 @@
 # Licensed under the MIT License.
 
 import importlib
+import sys
+
 import torch
 
 
@@ -10,7 +12,10 @@ def find_model_using_name(model_name):
     # the file "models/modelname_model.py"
     # will be imported.
     model_filename = "models." + model_name + "_model"
-    modellib = importlib.import_module(model_filename)
+    try:
+        modellib = importlib.import_module(model_filename)
+    except ImportError:
+        modellib = importlib.import_module("."+model_name + "_model",package=__name__)
 
     # In the file, the class called ModelNameModel() will
     # be instantiated. It has to be a subclass of torch.nn.Module,

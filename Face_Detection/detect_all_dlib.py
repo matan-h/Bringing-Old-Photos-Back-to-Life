@@ -135,8 +135,6 @@ def main(opts=None):
     )
     if opts is None:
         opts = parser.parse_args()
-    else:
-        opts = parser.parse_args(opts)
 
     url = opts.url
     save_url = opts.save_url

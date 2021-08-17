@@ -9,7 +9,7 @@ import torch.nn.utils.spectral_norm as spectral_norm
 try:
     from models.networks.normalization import SPADE
 except ImportError:
-    from ...models.networks.sync_batchnorm import SynchronizedBatchNorm2d
+    from ...models.networks.normalization import SPADE
 
 
 # ResNet block that uses SPADE.

@@ -148,7 +148,10 @@ def str2bool(v):
 
 def find_class_in_module(target_cls_name, module):
     target_cls_name = target_cls_name.replace("_", "").lower()
-    clslib = importlib.import_module(module)
+    try:
+        clslib = importlib.import_module(module)
+    except ImportError:
+        clslib = importlib.import_module('Face_Enhancement.'+module)
     cls = None
     for name, clsobj in clslib.__dict__.items():
         if name.lower() == target_cls_name:

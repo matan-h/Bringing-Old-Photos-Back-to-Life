@@ -103,7 +103,7 @@ def main(opt=None):
     if opt is None:
         opt = TestOptions().parse(save=False)
     else:
-        opt = TestOptions().parser.parse_args(opt)
+        opt = TestOptions().parse(False,opt)
 
     parameter_set(opt)
 

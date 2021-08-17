@@ -15,12 +15,9 @@ except ImportError:
     from .util.visualizer import Visualizer
 import torchvision.utils as vutils
 import warnings
-def main(opt=None):
+def main():
     warnings.filterwarnings("ignore", category=UserWarning)
-    if opt is None:
-        opt = TestOptions().parse()
-    else:
-        opt = TestOptions().parser.parse_args(opt)
+    opt = TestOptions().parse()
 
     dataloader = data.create_dataloader(opt)
 
