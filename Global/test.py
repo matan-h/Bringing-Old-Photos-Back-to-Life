@@ -92,9 +92,12 @@ def parameter_set(opt):
             opt.name = "mapping_Patch_Attention"
 
 
-if __name__ == "__main__":
+def main(opt=None):
+    if opt is None:
+        opt = TestOptions().parse(save=False)
+    else:
+        opt = TestOptions().parser.parse_args(opt)
 
-    opt = TestOptions().parse(save=False)
     parameter_set(opt)
 
     model = Pix2PixHDModel_Mapping()

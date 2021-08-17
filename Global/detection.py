@@ -88,7 +88,7 @@ def main(config):
     )
 
     ## load model
-    checkpoint_path = os.path.join(os.path.dirname(__file__), "checkpoints/detection/FT_Epoch_latest.pt")
+    checkpoint_path = os.path.join(os.path.dirname(__file__), "checkpoints","detection","FT_Epoch_latest.pt")
     checkpoint = torch.load(checkpoint_path, map_location="cpu")
     model.load_state_dict(checkpoint["model_state"])
     print("model weights loaded")
@@ -101,6 +101,7 @@ def main(config):
 
     ## dataloader and transformation
     print("directory of testing image: " + config.test_path)
+
     imagelist = os.listdir(config.test_path)
     imagelist.sort()
     total_iter = 0
